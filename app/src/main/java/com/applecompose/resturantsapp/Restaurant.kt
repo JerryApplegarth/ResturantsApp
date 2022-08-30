@@ -1,10 +1,10 @@
-package com.applecompose.resturantsapp.data
+package com.applecompose.resturantsapp
 
 data class Restaurant(
 	val id: Int,
 	val title: String,
 	val description: String
-	)
+)
 
 val dummyRestaurants = listOf(
 	Restaurant(0, "Alfredo's dishes", "At Alfredo's, we provide the best seafood dishes."),
