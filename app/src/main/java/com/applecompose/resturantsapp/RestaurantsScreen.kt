@@ -1,4 +1,4 @@
-package com.applecompose.resturantsapp.presentation.screens
+package com.applecompose.resturantsapp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -14,15 +14,12 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.applecompose.resturantsapp.Restaurant
-import com.applecompose.resturantsapp.RestaurantsViewModel
 
 @Composable
 fun RestaurantsScreen() {
@@ -78,21 +75,7 @@ fun RestaurantItem(
 	}
 }
 
-//@Composable
-//fun FavoriteIcon(
-//	icon: ImageVector,
-//	modifier: Modifier,
-//	onClick: () -> Unit
-//) {
-//	Image(
-//		imageVector = icon,
-//		contentDescription = "Favorite restaurant icon",
-//		modifier = Modifier
-//			.padding(8.dp)
-//			.clickable { onClick() }
-//	)
-//
-//}
+
 
 @Composable
 private fun RestaurantIcon(
