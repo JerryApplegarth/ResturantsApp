@@ -24,7 +24,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
 fun RestaurantsScreen() {
 	val viewModel: RestaurantsViewModel = viewModel()
-
 	LazyColumn(
 		contentPadding = PaddingValues(
 			vertical = 8.dp,
@@ -34,19 +33,17 @@ fun RestaurantsScreen() {
 		items(viewModel.state.value) { restaurant ->
 			RestaurantItem(restaurant) { id ->
 				viewModel.toggleFavorite(id)
-
 			}
 		}
 	}
 }
 
 @Composable
-fun RestaurantItem(
-	item: Restaurant,
-	onClick: (id: Int) -> Unit
-) {
-
-	val icon = if (item.isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder
+fun RestaurantItem(item: Restaurant, onClick: (id: Int) -> Unit) {
+	val icon = if (item.isFavorite)
+		Icons.Filled.Favorite
+	else
+		Icons.Filled.FavoriteBorder
 	Card(
 		elevation = 4.dp,
 		modifier = Modifier.padding(8.dp)
@@ -55,41 +52,23 @@ fun RestaurantItem(
 			verticalAlignment = Alignment.CenterVertically,
 			modifier = Modifier.padding(8.dp)
 		) {
-			RestaurantIcon(
-				Icons.Filled.Place,
-				Modifier.weight(0.15f)
-			)
-			RestaurantDetails(
-				item.title,
-				item.description,
-				Modifier.weight(0.7f)
-			)
-			RestaurantIcon(
-				icon,
-				Modifier.weight(0.15f)
-			) {
+			RestaurantIcon(Icons.Filled.Place, Modifier.weight(0.15f))
+			RestaurantDetails(item.title, item.description, Modifier.weight(0.7f))
+			RestaurantIcon(icon, Modifier.weight(0.15f)) {
 				onClick(item.id)
 			}
-
 		}
 	}
 }
 
-
-
 @Composable
-private fun RestaurantIcon(
-	icon: ImageVector,
-	modifier: Modifier,
-	onClick: () -> Unit = {}
-) {
+private fun RestaurantIcon(icon: ImageVector, modifier: Modifier, onClick: () -> Unit = { }) {
 	Image(
 		imageVector = icon,
 		contentDescription = "Restaurant icon",
 		modifier = modifier
 			.padding(8.dp)
-			.clickable { onClick() }
-	)
+			.clickable { onClick() })
 }
 
 @Composable
@@ -109,6 +88,8 @@ private fun RestaurantDetails(title: String, description: String, modifier: Modi
 		}
 	}
 }
+
+
 
 @Preview(
 	showSystemUi = true,
