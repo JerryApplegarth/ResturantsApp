@@ -5,11 +5,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -36,9 +33,9 @@ class RestaurantsDetailsViewModel(
 	private suspend fun getRemoteRestaurant(id: Int):
 			Restaurant {
 		return withContext(Dispatchers.IO) {
-			val resposeMap = restInference
+			val response = restInference
 				.getRestaurant(id)
-			return@withContext resposeMap.values.first()
+			return@withContext response.values.first()
 		}
 	}
 }
