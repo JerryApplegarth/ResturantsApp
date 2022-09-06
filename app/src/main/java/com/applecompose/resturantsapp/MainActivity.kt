@@ -38,12 +38,9 @@ private fun RestaurantsApp() {
 			arguments = listOf(navArgument("restaurant_id") {
 				type = NavType.IntType
 			}),
-			deepLinks = listOf(navDeepLink {
-				uriPattern =
-					"www.restaurantsapp.details.com/{restaurant_id}"
-			})
-		) { RestaurantDetailScreen() }
+			deepLinks = listOf(navDeepLink { uriPattern =
+				"www.restaurantsapp.details.com/{restaurant_id}" }),
+		) { RestaurantDetailsScreen() }
 	}
 }
-
 

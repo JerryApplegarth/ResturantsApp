@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun RestaurantDetailScreen() {
-	val viewModel: RestaurantsDetailsViewModel = viewModel()
+fun RestaurantDetailsScreen() {
+	val viewModel: RestaurantDetailsViewModel = viewModel()
 	val item = viewModel.state.value
 	if (item != null) {
 		Column(
@@ -22,12 +22,10 @@ fun RestaurantDetailScreen() {
 			modifier = Modifier
 				.fillMaxSize()
 				.padding(16.dp)
-			) {
+		) {
 			RestaurantIcon(
-				icon = Icons.Filled.Place,
-				modifier = Modifier
-					.padding(top = 32.dp, bottom = 32.dp),
-
+				Icons.Filled.Place,
+				Modifier.padding(top = 32.dp, bottom = 32.dp)
 			)
 			RestaurantDetails(
 				item.title,
@@ -35,10 +33,7 @@ fun RestaurantDetailScreen() {
 				Modifier.padding(bottom = 32.dp),
 				Alignment.CenterHorizontally
 			)
-			Text(text = "More Info coming soon")
-
+			Text("More info coming soon!")
 		}
-
 	}
-
 }
