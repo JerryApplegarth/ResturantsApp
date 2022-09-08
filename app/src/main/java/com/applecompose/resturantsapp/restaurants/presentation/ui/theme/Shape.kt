@@ -1,4 +1,4 @@
-package com.applecompose.resturantsapp.presentation.ui.theme
+package com.applecompose.resturantsapp.restaurants.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

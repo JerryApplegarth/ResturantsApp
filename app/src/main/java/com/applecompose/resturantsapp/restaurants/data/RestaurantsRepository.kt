@@ -1,11 +1,16 @@
-package com.applecompose.resturantsapp
+package com.applecompose.resturantsapp.restaurants.data
 
+import com.applecompose.resturantsapp.RestaurantsApplication
+import com.applecompose.resturantsapp.restaurants.data.local.LocalRestaurant
+import com.applecompose.resturantsapp.restaurants.data.local.PartialLocalRestaurant
+import com.applecompose.resturantsapp.restaurants.data.local.RestaurantsDb
+import com.applecompose.resturantsapp.restaurants.data.remote.RestaurantsApiService
+import com.applecompose.resturantsapp.restaurants.domain.Restaurant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.net.ConnectException
 import java.net.UnknownHostException
 
@@ -24,15 +29,22 @@ class RestaurantsRepository {
 
 	suspend fun toggleFavoriteRestaurant(
 		id: Int,
-		oldValue: Boolean
+		value: Boolean
 	) = withContext(Dispatchers.IO) {
 		restaurantsDao.update(
-			PartialRestaurant(id = id, isFavorite = !oldValue))
-		restaurantsDao.getAll()
+			PartialLocalRestaurant(id = id, isFavorite = value)
+		)
 	}
 
+	suspend fun getRestaurants() : List<Restaurant> {
+		return withContext(Dispatchers.IO) {
+			return@withContext restaurantsDao.getAll().map {
+				Restaurant(it.id, it.title, it.description, it.isFavorite)
+			}
+		}
+	}
 
-	suspend fun getAllRestaurants(): List<Restaurant> {
+	suspend fun loadRestaurants() {
 		return withContext(Dispatchers.IO) {
 			try {
 				refreshCache()
@@ -49,19 +61,18 @@ class RestaurantsRepository {
 					else -> throw e
 				}
 			}
-			return@withContext restaurantsDao.getAll()
-				.sortedBy { it.title }
 		}
 	}
 
 	private suspend fun refreshCache() {
 		val remoteRestaurants = restInterface.getRestaurants()
 		val favoriteRestaurants = restaurantsDao.getAllFavorited()
-		restaurantsDao.addAll(remoteRestaurants)
+		restaurantsDao.addAll(remoteRestaurants.map {
+			LocalRestaurant(it.id, it.title, it.description, false)
+		})
 		restaurantsDao.updateAll(
 			favoriteRestaurants.map {
-				PartialRestaurant(it.id, true)
+				PartialLocalRestaurant(id = it.id, isFavorite = true)
 			})
 	}
-
 }

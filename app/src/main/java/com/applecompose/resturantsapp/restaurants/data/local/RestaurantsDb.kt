@@ -1,4 +1,4 @@
-package com.applecompose.resturantsapp
+package com.applecompose.resturantsapp.restaurants.data.local
 
 import android.content.Context
 import androidx.room.Database
@@ -6,17 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-	entities = [Restaurant::class],
-	version = 2,
+	entities = [LocalRestaurant::class],
+	version = 3,
 	exportSchema = false
 )
-abstract class RestaurantsDb: RoomDatabase( ) {
+abstract class RestaurantsDb : RoomDatabase() {
 	abstract val dao: RestaurantsDao
-	companion object {
 
+	companion object {
 		@Volatile
 		private var INSTANCE: RestaurantsDao? = null
-		fun getDaoInstance(context: Context): RestaurantsDao{
+
+		fun getDaoInstance(context: Context): RestaurantsDao {
 			synchronized(this) {
 				var instance = INSTANCE
 				if (instance == null) {
@@ -27,15 +28,12 @@ abstract class RestaurantsDb: RoomDatabase( ) {
 			}
 		}
 
-		private fun buildDatabase(context: Context):
-				RestaurantsDb =
+		private fun buildDatabase(context: Context): RestaurantsDb =
 			Room.databaseBuilder(
 				context.applicationContext,
 				RestaurantsDb::class.java,
-				"restaurants_database"
-			)
+				"restaurants_database")
 				.fallbackToDestructiveMigration()
 				.build()
-
 	}
 }

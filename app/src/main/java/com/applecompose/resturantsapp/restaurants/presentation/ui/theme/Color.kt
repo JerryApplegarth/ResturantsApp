@@ -1,4 +1,4 @@
-package com.applecompose.resturantsapp.presentation.ui.theme
+package com.applecompose.resturantsapp.restaurants.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.applecompose.resturantsapp
+package com.applecompose.resturantsapp.restaurants.presentation.details
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.applecompose.resturantsapp.restaurants.presentation.list.RestaurantDetails
+import com.applecompose.resturantsapp.restaurants.presentation.list.RestaurantIcon
 
 @Composable
 fun RestaurantDetailsScreen() {
